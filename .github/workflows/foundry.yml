@@ -1,0 +1,11 @@
+# .github/workflows/foundry.yml
+name: Forge Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: curl -L https://foundry.paradigm.xyz | bash
+      - run: foundryup
+      - run: forge test -vv
