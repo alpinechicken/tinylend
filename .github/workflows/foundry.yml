@@ -1,11 +1,20 @@
-# .github/workflows/foundry.yml
-name: Forge Tests
+name: Forge CI
+
 on: [push, pull_request]
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: curl -L https://foundry.paradigm.xyz | bash
-      - run: foundryup
-      - run: forge test -vv
+        with:
+          submodules: recursive   # grabs lib/ if you committed it
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1     # 1-line install
+        with:
+          version: stable        # or nightly / v0.3.9 etc.
+          cache: true            # keep RPC responses
+
+      - name: Run tests
+        run: forge test -vv
