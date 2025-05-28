@@ -1,66 +1,72 @@
-## Foundry
+# TinyLend
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+TinyLend is a minimal lending protocol implementation designed for testing and integration purposes. It provides a simplified version of common lending protocol functionality while maintaining the core mechanics of supply, borrow, and interest accrual.
 
-Foundry consists of:
+## Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+TinyLend implements a basic lending protocol with the following features:
+- Supply and withdraw assets
+- Borrow and repay assets
+- Interest accrual (5% fixed APR)
+- Share-based accounting system
+- Single collateral type support
 
-## Documentation
+## Technical Details
 
-https://book.getfoundry.sh/
+### Core Components
+
+- **Market**: Tracks supply and borrow rates, total shares, and underlying amounts
+- **Account**: Manages user supply and borrow positions
+- **Interest Model**: Simple fixed-rate model (5% APR)
+
+### Key Functions
+
+```solidity
+function deposit(address col, uint256 amt) external
+function withdraw(address col, uint256 amt) external
+function borrow(address col, uint256 amt) external
+function repay(address col, uint256 amt) external
+```
+
+### Accounting System
+
+TinyLend uses a share-based accounting system:
+- Supply shares represent a user's share of the total supplied assets
+- Borrow shares represent a user's share of the total borrowed assets
+- Interest accrual is handled through accumulator variables
 
 ## Usage
 
-### Build
+TinyLend is primarily intended for:
+- Testing integration with lending protocols
+- Prototyping lending-related features
+- Educational purposes
+- Development and testing environments
 
-```shell
-$ forge build
+## Development
+
+### Setup
+
+```bash
+# Install dependencies
+forge install
+
+# Run tests
+forge test
 ```
 
-### Test
+### Testing
 
-```shell
-$ forge test
-```
+The test suite includes examples of:
+- Basic deposit/withdraw operations
+- Borrow/repay functionality
+- Interest accrual verification
+- Market state management
 
-### Format
+## Security
 
-```shell
-$ forge fmt
-```
+⚠️ **Important**: TinyLend is not intended for production use. It lacks many security features and optimizations that would be necessary in a real lending protocol.
 
-### Gas Snapshots
+## License
 
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+MIT
