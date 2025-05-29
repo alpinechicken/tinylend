@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 import { Test, console} from "forge-std/Test.sol";
 import { TinyLend } from "../src/TinyLend.sol";
-import { ERC20 } from "openzeppelin-contracts/token/ERC20/ERC20.sol";
+import { ERC20 } from "@openzeppelin/token/ERC20/ERC20.sol";
 
 // mock ERC20 token for testing
 contract MockToken is ERC20 {
@@ -27,7 +27,7 @@ contract TinyLendTest is Test {
         mockToken.transfer(bob, 10000 * 10**18);
     }
 
-    function test_InitialMarketState() public {
+    function test_InitialMarketState() public view {
         // check initial market state
         (uint256 supplyAcc, uint256 borrowAcc, uint256 totalSupplyShares, 
          uint256 totalBorrowShares, uint256 totalBorrowUnderlying, uint256 lastAccrual) = 
