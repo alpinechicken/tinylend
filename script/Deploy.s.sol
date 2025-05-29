@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import { Script } from "forge-std/Script.sol";
-import { TinyLend } from "../src/TinyLend.sol";
-import { Create2 } from "@openzeppelin/utils/Create2.sol";
-import { console } from "forge-std/console.sol";
+import {Script} from "forge-std/Script.sol";
+import {TinyLend} from "../src/TinyLend.sol";
+import {Create2} from "@openzeppelin/utils/Create2.sol";
+import {console} from "forge-std/console.sol";
 
 contract DeployScript is Script {
     // salt for create2 deployment - can be any bytes32 value
@@ -32,4 +32,3 @@ contract DeployScript is Script {
 
 // To deploy and verify on Arbitrum Sepolia:
 //forge script script/Deploy.s.sol:DeployScript --fork-url $ARBITRUM_SEPOLIA_RPC_URL --broadcast --verify --verifier-url $ETHERSCAN_API_KEY --etherscan-api-key $ARBISCAN_API_KEY -vvvv
-
